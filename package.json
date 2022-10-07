@@ -1,9 +1,14 @@
 {
   "name": "@txd/utils",
-  "private": true,
-  "version": "0.0.0",
+  "private": false,
+  "version": "0.1.0",
   "type": "module",
-  "module": "dist/utils.js",
+  "main": "./dist/utils.js",
+  "module": "./dist/utils.js",
+  "license": "MIT",
+  "files": [
+    "./dist/utils.js"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
