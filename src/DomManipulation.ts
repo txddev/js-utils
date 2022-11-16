@@ -12,13 +12,14 @@ export function offset (element: HTMLElement) : { top:number, left:number, width
     };
 }
 
-export function getParents (el: HTMLElement, parentSelector: HTMLElement|Document|null) {
+export function getParents (el: HTMLElement, parentSelector: string|HTMLElement|Document|null) {
     if (parentSelector === undefined) {
         parentSelector = window.document;
     }
     var parents = [];
     var p = el.parentNode;
-    while (p!= null && p !== parentSelector) {
+    
+    while (p!= null && (parentSelector instanceof HTMLElement && p !== parentSelector) && (parentSelector instanceof String && !(p as HTMLElement).matches(parentSelector as unknown as string))) {
         var o = p;
         parents.push(o);
         p = o.parentNode;

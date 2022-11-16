@@ -1,24 +1,24 @@
-const n = /* @__PURE__ */ new WeakMap();
-class o {
-  static put(t, i, r) {
-    n.has(t) || n.set(t, /* @__PURE__ */ new Map()), n.get(t).set(i, r);
+const s = /* @__PURE__ */ new WeakMap();
+class r {
+  static put(t, i, n) {
+    s.has(t) || s.set(t, /* @__PURE__ */ new Map()), s.get(t).set(i, n);
   }
   static get(t, i) {
-    return n.get(t).get(i);
+    return s.get(t).get(i);
   }
   static has(t, i) {
-    return n.has(t) && n.get(t).has(i);
+    return s.has(t) && s.get(t).has(i);
   }
   static remove(t, i) {
-    var r = n.get(t).delete(i);
-    return n.get(t).size !== 0 && n.delete(t), r;
+    var n = s.get(t).delete(i);
+    return s.get(t).size !== 0 && s.delete(t), n;
   }
-  static lock(t, i, r) {
-    return o.has(t, i) ? !1 : (o.put(t, i, !0), r());
+  static lock(t, i, n) {
+    return r.has(t, i) ? !1 : (r.put(t, i, !0), n());
   }
 }
-({ BASE_URL: "/", MODE: "production", DEV: !1, PROD: !0 }).DATASTORE_DEBUG && (window.__Store = n);
-function u(e) {
+({ BASE_URL: "/", MODE: "production", DEV: !1, PROD: !0 }).DATASTORE_DEBUG && (window.__Store = s);
+function o(e) {
   if (e == null)
     return { top: 0, left: 0, width: null, height: null };
   let t = e.getBoundingClientRect();
@@ -31,9 +31,9 @@ function u(e) {
 }
 function a(e, t) {
   t === void 0 && (t = window.document);
-  for (var i = [], r = e.parentNode; r != null && r !== t; ) {
-    var s = r;
-    i.push(s), r = s.parentNode;
+  for (var i = [], n = e.parentNode; n != null && t instanceof HTMLElement && n !== t && t instanceof String && !n.matches(t); ) {
+    var u = n;
+    i.push(u), n = u.parentNode;
   }
   return i.push(t), i;
 }
@@ -47,9 +47,9 @@ function d(e) {
   });
 }
 export {
-  o as DataStore,
+  r as DataStore,
   d as empty,
   a as getParents,
-  u as offset,
+  o as offset,
   c as wrap
 };
