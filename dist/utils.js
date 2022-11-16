@@ -18,7 +18,7 @@ class r {
   }
 }
 ({ BASE_URL: "/", MODE: "production", DEV: !1, PROD: !0 }).DATASTORE_DEBUG && (window.__Store = s);
-function o(e) {
+function u(e) {
   if (e == null)
     return { top: 0, left: 0, width: null, height: null };
   let t = e.getBoundingClientRect();
@@ -31,16 +31,16 @@ function o(e) {
 }
 function a(e, t) {
   t === void 0 && (t = window.document);
-  for (var i = [], n = e.parentNode; n != null && t instanceof HTMLElement && n !== t && t instanceof String && !n.matches(t); ) {
-    var u = n;
-    i.push(u), n = u.parentNode;
+  for (var i = [], n = e.parentNode; n != null && n instanceof HTMLElement && !(t instanceof HTMLElement && n === t) && !(typeof t == "string" && n.matches(t)); ) {
+    var o = n;
+    i.push(o), n = o.parentNode;
   }
-  return i.push(t), i;
+  return n != null && i.push(n), i;
 }
 function c(e, t) {
   return t = t || document.createElement("div"), e.after(t), t.appendChild(e);
 }
-function d(e) {
+function f(e) {
   var t = Array.prototype.slice.call(e.childNodes);
   t.forEach(function(i) {
     e.removeChild(i);
@@ -48,8 +48,8 @@ function d(e) {
 }
 export {
   r as DataStore,
-  d as empty,
+  f as empty,
   a as getParents,
-  o as offset,
+  u as offset,
   c as wrap
 };

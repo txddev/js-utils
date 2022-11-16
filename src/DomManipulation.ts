@@ -19,16 +19,14 @@ export function getParents (el: HTMLElement, parentSelector: string|HTMLElement|
     var parents = [];
     var p = el.parentNode;
     
-    while (p!= null && (parentSelector instanceof HTMLElement && p !== parentSelector) && (parentSelector instanceof String && !(p as HTMLElement).matches(parentSelector as unknown as string))) {
+    while (p!= null && p instanceof HTMLElement  && !(parentSelector instanceof HTMLElement && p === parentSelector) && !(typeof parentSelector == "string" && (p as HTMLElement).matches(parentSelector as unknown as string))) {
         var o = p;
         parents.push(o);
         p = o.parentNode;
     }
-    parents.push(parentSelector);
+    if(p != null) parents.push(p);
     return parents;
 }
-
-
 
 export function wrap (toWrap: HTMLElement, wrapper: HTMLElement|null) {
     wrapper = wrapper || document.createElement('div');
