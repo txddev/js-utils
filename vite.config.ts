@@ -7,7 +7,7 @@ export default defineConfig({
     build: {    
         lib: {
           formats:["es"],
-          entry: './src/libWrapper.ts',
+          entry: './src/main.ts',
         },
     }
 })
