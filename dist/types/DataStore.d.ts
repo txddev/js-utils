@@ -3,5 +3,6 @@ export declare class DataStore {
     static get(element: HTMLElement, key: object): any;
     static has(element: HTMLElement, key: object): any;
     static remove(element: HTMLElement, key: object): any;
-    static lock(element: HTMLElement, key: object, callback: () => any): any | false;
+    static lock<T>(element: HTMLElement, key: object, callback: () => T): T | false;
+    static lockAsync<T>(element: HTMLElement, key: object, callback: () => Promise<T>): Promise<T | false>;
 }

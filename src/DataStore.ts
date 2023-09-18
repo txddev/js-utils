@@ -24,10 +24,26 @@ export class DataStore {
         return ret;
     }
     
-    static lock(element: HTMLElement, key: object,callback: () => any ): any|false {
+    static lock<T>(element: HTMLElement, key: object,callback: () => T ): T|false {
         if(!DataStore.has(element,key)){
             DataStore.put(element,key,true)
-            return callback()
+            const returnVal = callback()
+            if(returnVal !== undefined){
+                DataStore.put(element,key,returnVal)
+            }
+            return returnVal
+            
+        }
+        return false
+    }
+    static async lockAsync<T>(element: HTMLElement, key: object,callback: () => Promise<T> ): Promise<T|false> {
+        if(!DataStore.has(element,key)){
+            DataStore.put(element,key,true)
+            const returnVal = await callback()
+            if(returnVal !== undefined){
+                DataStore.put(element,key,returnVal)
+            }
+            return returnVal
             
         }
         return false

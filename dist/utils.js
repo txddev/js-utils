@@ -1,27 +1,40 @@
-const s = /* @__PURE__ */ new WeakMap();
-class r {
+const r = /* @__PURE__ */ new WeakMap();
+class c {
   static put(t, i, n) {
-    s.has(t) || s.set(t, /* @__PURE__ */ new Map()), s.get(t).set(i, n);
+    r.has(t) || r.set(t, /* @__PURE__ */ new Map()), r.get(t).set(i, n);
   }
   static get(t, i) {
-    return s.get(t).get(i);
+    return r.get(t).get(i);
   }
   static has(t, i) {
-    return s.has(t) && s.get(t).has(i);
+    return r.has(t) && r.get(t).has(i);
   }
   static remove(t, i) {
-    var n = s.get(t).delete(i);
-    return s.get(t).size !== 0 && s.delete(t), n;
+    var n = r.get(t).delete(i);
+    return r.get(t).size !== 0 && r.delete(t), n;
   }
   static lock(t, i, n) {
-    return r.has(t, i) ? !1 : (r.put(t, i, !0), n());
+    if (!c.has(t, i)) {
+      c.put(t, i, !0);
+      const u = n();
+      return u !== void 0 && c.put(t, i, u), u;
+    }
+    return !1;
+  }
+  static async lockAsync(t, i, n) {
+    if (!c.has(t, i)) {
+      c.put(t, i, !0);
+      const u = await n();
+      return u !== void 0 && c.put(t, i, u), u;
+    }
+    return !1;
   }
 }
-({ BASE_URL: "/", MODE: "production", DEV: !1, PROD: !0 }).DATASTORE_DEBUG && (window.__Store = s);
-function u(e) {
-  if (e == null)
+({ BASE_URL: "/", MODE: "production", DEV: !1, PROD: !0 }).DATASTORE_DEBUG && (window.__Store = r);
+function o(s) {
+  if (s == null)
     return { top: 0, left: 0, width: null, height: null };
-  let t = e.getBoundingClientRect();
+  let t = s.getBoundingClientRect();
   return {
     top: t.top + window.scrollY,
     left: t.left + window.scrollX,
@@ -29,27 +42,27 @@ function u(e) {
     height: t.height
   };
 }
-function a(e, t) {
+function f(s, t) {
   t === void 0 && (t = window.document);
-  for (var i = [], n = e.parentNode; n != null && n instanceof HTMLElement && !(t instanceof HTMLElement && n === t) && !(typeof t == "string" && n.matches(t)); ) {
-    var o = n;
-    i.push(o), n = o.parentNode;
+  for (var i = [], n = s.parentNode; n != null && n instanceof HTMLElement && !(t instanceof HTMLElement && n === t) && !(typeof t == "string" && n.matches(t)); ) {
+    var u = n;
+    i.push(u), n = u.parentNode;
   }
   return n != null && i.push(n), i;
 }
-function c(e, t) {
-  return t = t || document.createElement("div"), e.after(t), t.appendChild(e);
+function e(s, t) {
+  return t = t || document.createElement("div"), s.after(t), t.appendChild(s);
 }
-function f(e) {
-  var t = Array.prototype.slice.call(e.childNodes);
+function a(s) {
+  var t = Array.prototype.slice.call(s.childNodes);
   t.forEach(function(i) {
-    e.removeChild(i);
+    s.removeChild(i);
   });
 }
 export {
-  r as DataStore,
-  f as empty,
-  a as getParents,
-  u as offset,
-  c as wrap
+  c as DataStore,
+  a as empty,
+  f as getParents,
+  o as offset,
+  e as wrap
 };
