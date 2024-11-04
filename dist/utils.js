@@ -30,7 +30,7 @@ class c {
     return !1;
   }
 }
-({ BASE_URL: "/", MODE: "production", DEV: !1, PROD: !0 }).DATASTORE_DEBUG && (window.__Store = r);
+({}).DATASTORE_DEBUG && (window.__Store = r);
 function o(s) {
   if (s == null)
     return { top: 0, left: 0, width: null, height: null };
